@@ -2,36 +2,57 @@ class GamesController < ApplicationController
 
   # GET: /games
   get "/games" do
-    erb :"/games/index.html"
+      erb :"/games/index"
   end
 
   # GET: /games/new
   get "/games/new" do
-    erb :"/games/new.html"
+      @games = Game.all
+      erb :"/games/new"
   end
 
   # POST: /games
   post "/games" do
-    redirect "/games"
+      params[:game_ids].each do |game_id|
+          @checked_game = Game.find_by(id: game_id)
+          if !current_user.games.include?(@checked_game)
+              current_user.games << @checked_game
+          end
+      end unless params[:game_ids].nil?
+      if !params[:game][:title].empty? && !params[:game][:release_year].empty? && !params[:game][:company].empty?
+          @game = Game.find_by(title: params[:game][:title])
+          if @game.nil?
+              current_user.games.create(title: params[:movie][:title], release_year: params[:game][:release_year], company: params[:game][:company])
+          elsif @game.title == params[:movie][:title] && @game.release_year == params[:game][:release_year] && @game.company == params[:game][:company]
+              current_user.games << @game
+          end
+      end
+      redirect "/users/#{current_user.id}"
   end
 
   # GET: /games/5
   get "/games/:id" do
-    erb :"/games/show.html"
+      @game = Game.find(params[:id])
+      erb :"/games/show"
   end
 
   # GET: /games/5/edit
   get "/games/:id/edit" do
-    erb :"/games/edit.html"
+      @game = current_user.games.find_by(id: params[:id])
+      erb :"/games/edit"
   end
 
   # PATCH: /games/5
   patch "/games/:id" do
-    redirect "/games/:id"
+      @game = current_user.games.find_by(id: params[:id])
+      current_user.games.delete(params[:id])
+      current_user.games.create(params[:game])
+      redirect "/users/#{current_user.id}"
   end
 
   # DELETE: /games/5/delete
-  delete "/games/:id/delete" do
-    redirect "/games"
+  delete "/games/:id" do
+          current_user.games.delete(params[:id])
+      redirect "/users/#{current_user.id}"
   end
 end

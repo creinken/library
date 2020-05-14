@@ -46,7 +46,8 @@ class MoviesController < ApplicationController
     end
 
     # DELETE: /movies/5/delete
-    delete "/movies/:id/delete" do
-        redirect "/movies"
+    delete "/movies/:id" do
+            current_user.movies.delete(params[:id])
+        redirect "/users/#{current_user.id}"
     end
 end

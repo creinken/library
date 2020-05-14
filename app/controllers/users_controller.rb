@@ -76,11 +76,4 @@ class UsersController < ApplicationController
     delete "/users/:id" do
         redirect "/index"
     end
-
-    #DELETE: /users/5/movies
-    delete "/users/:id/movies" do
-        binding.pry
-        @user = current_user
-        @user.movies.destroy_by(id: params[:movies][:id])
-    end
 end

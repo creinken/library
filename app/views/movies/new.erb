@@ -1,1 +1,15 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<h1>Add a Movie to your collection.</h1>
+
+<form action="/movies" method="post">
+    <p>Please pick from the existing movies or add one of your own below.</p>
+
+    <% @movies.each do |movie| %>
+        <input type="checkbox" name="user[movies][]" id="<%= movie.id %>" value="<%= movie.id %>"><%= movie.title %><br>
+    <% end %>
+
+    <input type="text" name="user[movies][][title]" value="" placeholder="Movie Title"><br>
+    <input type="text" name="user[movies][][release_year]" value="" placeholder="Release Year"><br>
+    <input type="text" name="user[movies][][director]" value="" placeholder="Director"><br>
+
+    <input type="submit" name="submit" value="Add Movies">
+</form>

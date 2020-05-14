@@ -2,27 +2,28 @@ class MoviesController < ApplicationController
 
   # GET: /movies
   get "/movies" do
-    erb :"/movies/index.html"
+    erb :"/movies/index"
   end
 
   # GET: /movies/new
   get "/movies/new" do
-    erb :"/movies/new.html"
+    @movies = Movie.all
+    erb :"/movies/new"
   end
 
   # POST: /movies
   post "/movies" do
-    redirect "/movies"
+    redirect "/users/#{current_user.id}"
   end
 
   # GET: /movies/5
   get "/movies/:id" do
-    erb :"/movies/show.html"
+    erb :"/movies/show"
   end
 
   # GET: /movies/5/edit
   get "/movies/:id/edit" do
-    erb :"/movies/edit.html"
+    erb :"/movies/edit"
   end
 
   # PATCH: /movies/5

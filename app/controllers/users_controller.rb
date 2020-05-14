@@ -58,6 +58,7 @@ class UsersController < ApplicationController
 
     # GET: /users/5
     get "/users/:id" do
+        @user = User.find_by(id: current_user.id)
         erb :"/users/show"
     end
 
@@ -74,5 +75,12 @@ class UsersController < ApplicationController
     # DELETE: /users/5/delete
     delete "/users/:id" do
         redirect "/index"
+    end
+
+    #DELETE: /users/5/movies
+    delete "/users/:id/movies" do
+        binding.pry
+        @user = current_user
+        @user.movies.destroy_by(id: params[:movies][:id])
     end
 end

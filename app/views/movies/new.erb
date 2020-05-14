@@ -4,12 +4,12 @@
     <p>Please pick from the existing movies or add one of your own below.</p>
 
     <% @movies.each do |movie| %>
-        <input type="checkbox" name="user[movies][]" id="<%= movie.id %>" value="<%= movie.id %>"><%= movie.title %><br>
+        <input type="checkbox" name="[movie_ids][]" id="<%= movie.id %>" value="<%= movie.id %>"><%= movie.title %> <%= movie.release_year %><br>
     <% end %>
 
-    <input type="text" name="user[movies][][title]" value="" placeholder="Movie Title"><br>
-    <input type="text" name="user[movies][][release_year]" value="" placeholder="Release Year"><br>
-    <input type="text" name="user[movies][][director]" value="" placeholder="Director"><br>
+    <input type="text" name="[movie][title]" value="" placeholder="Movie Title"><br>
+    <input type="text" name="[movie][release_year]" value="" placeholder="Release Year"><br>
+    <input type="text" name="[movie][director]" value="" placeholder="Director"><br>
 
     <input type="submit" name="submit" value="Add Movies">
 </form>

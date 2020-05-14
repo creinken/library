@@ -1,11 +1,11 @@
-<form action="index.html" method="post">
+<form action="/movies/<%= @movie.id %>" method="post">
     <input type="hidden" name="_method" value="patch">
-    <label for="movies[title]">Movie Title: </label>
-    <input type="text" name="movies[title]" value="<%= @movie.title %>"><br>
-    <label for="movies[release_year]">Release Year: </label>
-    <input type="text" name="movies[release_year]" value="<%= @movie.release_year %>"><br>
-    <label for="movies[director]">Director: </label>
-    <input type="text" name="movies[director]" value="<%= @movie.director %>"><br>
+    <label for="movie[title]">Movie Title: </label>
+    <input type="text" name="movie[title]" value="<%= @movie.title %>"><br>
+    <label for="movie[release_year]">Release Year: </label>
+    <input type="text" name="movie[release_year]" value="<%= @movie.release_year %>"><br>
+    <label for="movie[director]">Director: </label>
+    <input type="text" name="movie[director]" value="<%= @movie.director %>"><br>
     <br>
     <input type="submit" name="update" value="Update Movie">
 </form>

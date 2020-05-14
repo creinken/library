@@ -1,1 +1,9 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1><%= @movie.title %></h1>
+
+<h3>Released In: <%= @movie.release_year %></h3>
+
+<h5>Directed by: <%= @movie.director %></h5>
+
+<% if current_user.movies.include?(@movie) %>
+    <a href="/movies/<%= @movie.id %>">Edit Details</a>
+<% end %>

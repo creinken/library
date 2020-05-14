@@ -32,17 +32,22 @@ class MoviesController < ApplicationController
 
     # GET: /movies/5
     get "/movies/:id" do
+        @movie = Movie.find(params[:id])
         erb :"/movies/show"
     end
 
     # GET: /movies/5/edit
     get "/movies/:id/edit" do
+        @movie = current_user.movies.find_by(id: params[:id])
         erb :"/movies/edit"
     end
 
     # PATCH: /movies/5
     patch "/movies/:id" do
-        redirect "/movies/:id"
+        @movie = current_user.movies.find_by(id: params[:id])
+        current_user.movies.delete(params[:id])
+        current_user.movies.create(params[:movie])
+        redirect "/users/#{current_user.id}"
     end
 
     # DELETE: /movies/5/delete

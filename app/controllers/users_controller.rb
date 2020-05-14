@@ -69,7 +69,8 @@ class UsersController < ApplicationController
 
     # PATCH: /users/5
     patch "/users/:id" do
-        redirect "/users/:id"
+        current_user.update(params[:user])
+        redirect "/users/#{current_user.id}"
     end
 
     # DELETE: /users/5/delete

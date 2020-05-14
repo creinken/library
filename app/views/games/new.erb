@@ -1,0 +1,17 @@
+<h1>Add a Game to your collection.</h1>
+
+<form action="/movies" method="post">
+    <p>Please pick from the existing games or add one of your own below.</p>
+
+    <% @games.each do |game| %>
+        <input type="checkbox" name="[game_ids][]" id="<%= game.id %>" value="<%= game.id %>"><%= game.title %> <%= game.release_year %><br>
+    <% end %>
+
+    <input type="text" name="[game][title]" value="" placeholder="Game Title"><br>
+    <input type="text" name="[game][release_year]" value="" placeholder="Release Year"><br>
+    <input type="text" name="[game][company]" value="" placeholder="Company"><br>
+    <input type="text" name="[game][console]" value="" placeholder="Console"><br>
+    <input type="text" name="[game][genre]" value="" placeholder="Genre"><br>
+    <br>
+    <input type="submit" name="submit" value="Add Games">
+</form>

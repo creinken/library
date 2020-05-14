@@ -1,0 +1,10 @@
+<h1><%= @game.title %></h1>
+
+<h3>Released In: <%= @game.release_year %></h3>
+
+<h5>Produced by: <%= @game.company %></h5>
+<h5>Released on: <%= @game.console %> Genre: <%= @game.genre %></h5>
+
+<% if current_user.games.include?(@game) %>
+    <a href="/games/<%= @game.id %>">Edit Details</a>
+<% end %>

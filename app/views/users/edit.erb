@@ -11,3 +11,8 @@
     <br>
     <input type="submit" name="submit" value="Save Changes">
 </form>
+
+<form action="/users/<%= current_user.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" name="DELETE" value="Delete Profile">
+</form>

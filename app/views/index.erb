@@ -1,2 +1,11 @@
-<h2>Welcome!</h2>
-<h5>Please <a href="/login">Login</a> or <a href="/signup">Signup</a> to continue.</h5>
+<% if logged_in?(session) %>
+    <h2>Welcome, <%= current_user.username %>!</h2>
+    <ul>
+        <% User.all.each do |user| %>
+            <li><a href="/users/<%= user.id %>"><%= user.username %></a></li>
+        <% end %>
+    </ul>
+<% else %>
+    <h2>Welcome!</h2>
+    <h5>Please <a href="/login">Login</a> or <a href="/signup">Signup</a> to continue.</h5>
+<% end %>

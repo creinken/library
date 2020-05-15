@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200514223642) do
+ActiveRecord::Schema.define(version: 20200515190309) do
 
   create_table "games", force: :cascade do |t|
     t.string   "title"
@@ -34,17 +34,19 @@ ActiveRecord::Schema.define(version: 20200514223642) do
   create_table "user_games", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "purchase_date"
+    t.boolean  "loaned_out",    default: false
   end
 
   create_table "user_movies", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "movie_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "purchase_date"
-    t.boolean  "loaned_out"
+    t.boolean  "loaned_out",    default: false
   end
 
   create_table "users", force: :cascade do |t|

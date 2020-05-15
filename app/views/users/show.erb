@@ -1,4 +1,4 @@
-<h1>Welcome, <%= current_user.username %>!</h1>
+<h1>Welcome, <%= current_user.username %><% if owned_by(@user.id) %>!<% else %> to <%= @user.username %>'s library.<% end %></h1>
 
 <h3>Movies Collection</h3>
 <% if owned_by(@user.id) %>
@@ -13,7 +13,12 @@
                     <input type="submit" name="delete" id="<%= movie.id %>" value="Delete">
                 </form>
             <% else %>
-
+                <% if !@user.user_movies.find_by(movie_id: movie.id).loaned_out %>
+                    <form action="/users/<%= @user.id %>/borrow" method="post">
+                        <input type="hidden" name="_method" value="patch">
+                        <input type="submit" name="" value="Borrow">
+                    </form>
+                <% end %>
             <% end %>
         </div></li>
     <% end %>

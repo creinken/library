@@ -19,6 +19,7 @@
             <a href="/login">Log In</a>
             <a href="/signup">Sign Up</a>
         <% else %>
+            <a href="/">Home</a>
             <a href="/logout">Log Out</a>
             <a href="/users/<%= current_user.id %>">Library</a>
             <a href="/users/<%= current_user.id %>/edit">Edit Profile</a>

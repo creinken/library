@@ -21,5 +21,9 @@ class ApplicationController < Sinatra::Base
         def current_user
             User.find(session[:user_id])
         end
+
+        def owned_by(user_id)
+            user_id == current_user.id
+        end
     end
 end

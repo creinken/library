@@ -58,7 +58,12 @@ class UsersController < ApplicationController
 
     # GET: /users/5
     get "/users/:id" do
-        @user = User.find_by(id: current_user.id)
+        @user = User.find(params[:id].to_i)
+        @movies = @user.movies
+        @user_movies = @user.user_movies
+        @games = @user.games
+        @user_games = @user.user_games
+        # binding.pry
         erb :"/users/show"
     end
 

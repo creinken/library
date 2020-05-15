@@ -1,25 +1,39 @@
 <h1>Welcome, <%= current_user.username %>!</h1>
 
 <h3>Movies Collection</h3>
-<a href="/movies/new">Add a Movie</a>
+<% if owned_by(@user.id) %>
+    <a href="/movies/new">Add a Movie</a>
+<% end %>
 <ul>
-    <% @user.movies.each do |movie| %>
+    <% @movies.each do |movie| %>
         <li><div class="list-item"><a href="/movies/<%= movie.id %>"><%= movie.title %></a> <%= movie.release_year %>
-            <form action="/movies/<%= movie.id %>" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <input type="submit" name="delete" id="<%= movie.id %>" value="Delete">
-            </form></div></li>
+            <% if owned_by(@user.id) %>
+                <form action="/movies/<%= movie.id %>" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="submit" name="delete" id="<%= movie.id %>" value="Delete">
+                </form>
+            <% else %>
+
+            <% end %>
+        </div></li>
     <% end %>
 </ul>
 
 <h3>Games Collection</h3>
-<a href="/games/new">Add a Game</a>
+<% if owned_by(@user.id) %>
+    <a href="/games/new">Add a Game</a>
+<% end %>
 <ul>
-    <% @user.games.each do |game| %>
+    <% @games.each do |game| %>
         <li><div class="list-item"><a href="/games/<%= game.id %>"><%= game.title %></a> <%= game.release_year %>
-            <form action="/games/<%= game.id %>" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <input type="submit" name="delete" id="<%= game.id %>" value="Delete">
-            </form></div></li>
+            <% if owned_by(@user.id) %>
+                <form action="/games/<%= game.id %>" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="submit" name="delete" id="<%= game.id %>" value="Delete">
+                </form>
+            <% else %>
+
+            <% end %>
+        </div></li>
     <% end %>
 </ul>

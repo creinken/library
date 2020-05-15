@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
             end
         end unless params[:movie_ids].nil?
         if !params[:movie][:title].empty? && !params[:movie][:release_year].empty? && !params[:movie][:director].empty?
-            @movie = Movie.find_by(title: params[:movie][:title])
+            @movie = Movie.find_by(title: params[:movie][:title], release_year: params[:movie][:release_year])
             if @movie.nil?
                 current_user.movies.create(title: params[:movie][:title], release_year: params[:movie][:release_year], director: params[:movie][:director])
             elsif @movie.title == params[:movie][:title] && @movie.release_year == params[:movie][:release_year] && @movie.director == params[:movie][:director]

@@ -20,10 +20,11 @@ class GamesController < ApplicationController
           end
       end unless params[:game_ids].nil?
       if !params[:game][:title].empty? && !params[:game][:release_year].empty? && !params[:game][:company].empty?
-          @game = Game.find_by(title: params[:game][:title])
+          @game = Game.find_by(title: params[:game][:title], release_year: params[:game][:release_year])
+          binding.pry
           if @game.nil?
-              current_user.games.create(title: params[:movie][:title], release_year: params[:game][:release_year], company: params[:game][:company])
-          elsif @game.title == params[:movie][:title] && @game.release_year == params[:game][:release_year] && @game.company == params[:game][:company]
+              current_user.games.create(params[:game])
+          elsif @game.title == params[:game][:title] && @game.release_year == params[:game][:release_year] && @game.company == params[:game][:company]
               current_user.games << @game
           end
       end

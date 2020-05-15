@@ -6,5 +6,5 @@
 <h5>Released on: <%= @game.console %> Genre: <%= @game.genre %></h5>
 
 <% if current_user.games.include?(@game) %>
-    <a href="/games/<%= @game.id %>">Edit Details</a>
+    <a href="/games/<%= @game.id %>/edit">Edit Details</a>
 <% end %>

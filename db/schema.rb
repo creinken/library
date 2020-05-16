@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200515190309) do
+ActiveRecord::Schema.define(version: 20200515213806) do
+
+  create_table "borrowed_games", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "user_games_id"
+    t.integer  "game_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "borrowed_movies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "user_movies_id"
+    t.integer  "movie_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.string   "title"

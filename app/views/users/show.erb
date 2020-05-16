@@ -15,8 +15,7 @@
             <% else %>
                 <% if !@user.user_movies.find_by(movie_id: movie.id).loaned_out %>
                     <form action="/users/<%= @user.id %>/borrow" method="post">
-                        <input type="hidden" name="_method" value="patch">
-                        <input type="submit" name="" value="Borrow">
+                        <input type="submit" name="borrow" id="<%= movie.id %>" value="Borrow">
                     </form>
                 <% end %>
             <% end %>

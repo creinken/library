@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
     has_many :movies, through: :user_movies
     has_many :user_games
     has_many :games, through: :user_games
-    has_many :borrowed_movies
-    has_many :user_movies, through: :borrowed_movies
-    has_many :borrowed_games
-    has_many :user_games, through: :borrowed_games
+    # has_many :borrowed_movies
+    # has_many :user_movies, through: :borrowed_movies
+    # has_many :borrowed_games
+    # has_many :user_games, through: :borrowed_games
 
 
 

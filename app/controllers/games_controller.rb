@@ -38,18 +38,18 @@ class GamesController < ApplicationController
   end
 
   # GET: /games/5/edit
-  get "/games/:id/edit" do
-      @game = current_user.games.find_by(id: params[:id])
-      erb :"/games/edit"
-  end
+  # get "/games/:id/edit" do
+  #     @game = current_user.games.find_by(id: params[:id])
+  #     erb :"/games/edit"
+  # end
 
   # PATCH: /games/5
-  patch "/games/:id" do
-      @game = current_user.games.find_by(id: params[:id])
-      current_user.games.delete(params[:id])
-      current_user.games.create(params[:game])
-      redirect "/users/#{current_user.id}"
-  end
+  # patch "/games/:id" do
+  #     @game = current_user.games.find_by(id: params[:id])
+  #     current_user.games.delete(params[:id])
+  #     current_user.games.create(params[:game])
+  #     redirect "/users/#{current_user.id}"
+  # end
 
   # DELETE: /games/5/delete
   delete "/games/:id" do

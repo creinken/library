@@ -46,10 +46,35 @@ class ApplicationController < Sinatra::Base
                                     }
                                     doc.text(", #{item.release_year}")
                                     if owned_by(@user.id)
-                                        doc.form(action: "/#{@type}/#{item.id}", method: "post") {
+                                        doc.form(action: "/#{@type}s/#{item.id}", method: "post") {
                                             doc.input(type: "hidden", name: "_method", value: "delete")
                                             doc.input(type: "submit", name: "delete", id: "#{item.id}", value: "Delete")
                                         }
+                                        if @type == "movie"
+                                            if current_user.user_movies.find_by(movie_id: item.id).loaned_out == false
+                                                doc.form(action: "/#{@type}s/#{item.id}", method: "post") {
+                                                    doc.input(type: "hidden", name: "_method", value: "patch")
+                                                    doc.input(type: "submit", name: "loaned_out", id: "#{item.id}", value: "Lend Out")
+                                                }
+                                            else
+                                                doc.form(action: "/#{@type}s/#{item.id}", method: "post") {
+                                                    doc.input(type: "hidden", name: "_method", value: "patch")
+                                                    doc.input(type: "submit", name: "loaned_out", id: "#{item.id}", value: "Returned")
+                                                }
+                                            end
+                                        else
+                                            if current_user.user_games.find_by(game_id: item.id).loaned_out == false
+                                                doc.form(action: "/#{@type}s/#{item.id}", method: "post") {
+                                                    doc.input(type: "hidden", name: "_method", value: "patch")
+                                                    doc.input(type: "submit", name: "loaned_out", id: "#{item.id}", value: "Lend Out")
+                                                }
+                                            else
+                                                doc.form(action: "/#{@type}s/#{item.id}", method: "post") {
+                                                    doc.input(type: "hidden", name: "_method", value: "patch")
+                                                    doc.input(type: "submit", name: "loaned_out", id: "#{item.id}", value: "Returned")
+                                                }
+                                            end
+                                        end
                                     end # end if owned_by block
                                 }
                             }

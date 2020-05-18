@@ -4,40 +4,10 @@
 <% if owned_by(@user.id) %>
     <a href="/movies/new">Add a Movie</a>
 <% end %>
-<ul>
-    <% @movies.each do |movie| %>
-        <li><div class="list-item"><a href="/movies/<%= movie.id %>"><%= movie.title %></a> <%= movie.release_year %>
-            <% if owned_by(@user.id) %>
-                <form action="/movies/<%= movie.id %>" method="post">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="submit" name="delete" id="<%= movie.id %>" value="Delete">
-                </form>
-            <% else %>
-                <% if !@user.user_movies.find_by(movie_id: movie.id).loaned_out %>
-                    <form action="/users/<%= @user.id %>/borrow" method="post">
-                        <input type="submit" name="borrow" id="<%= movie.id %>" value="Borrow">
-                    </form>
-                <% end %>
-            <% end %>
-        </div></li>
-    <% end %>
-</ul>
+<%= list_collection(@user.movies, @user) %>
 
 <h3>Games Collection</h3>
 <% if owned_by(@user.id) %>
     <a href="/games/new">Add a Game</a>
 <% end %>
-<ul>
-    <% @games.each do |game| %>
-        <li><div class="list-item"><a href="/games/<%= game.id %>"><%= game.title %></a> <%= game.release_year %>
-            <% if owned_by(@user.id) %>
-                <form action="/games/<%= game.id %>" method="post">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="submit" name="delete" id="<%= game.id %>" value="Delete">
-                </form>
-            <% else %>
-
-            <% end %>
-        </div></li>
-    <% end %>
-</ul>
+<%= list_collection(@user.games, @user) %>

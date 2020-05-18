@@ -32,7 +32,7 @@ class ApplicationController < Sinatra::Base
         end
 
         def list_collection(collection, user)
-            
+            # set user to passed in user and type to passed in collection's class as a downcased string of the class name
             @user = user
             @type = collection.first.class.to_s.downcase
             @return_document_chunk = Nokogiri::HTML::DocumentFragment.parse ""

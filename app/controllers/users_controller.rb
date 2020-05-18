@@ -14,6 +14,8 @@ class UsersController < ApplicationController
     post "/signup" do
         if params[:username].empty? || params[:email].empty? || params[:password].empty?
             redirect '/signup'
+        elsif User.find_by(username: params[:usernam]) || User.find_by(email: params[:email])
+            redirect '/error'
         else
             @user = User.new(username: params[:username], email: params[:email], password: params[:password])
             if @user.save
@@ -83,5 +85,10 @@ class UsersController < ApplicationController
         current_user.delete
         session.clear
         redirect "/"
+    end
+
+    # GET: /error
+    get '/error' do
+        erb :"/users/error"
     end
 end

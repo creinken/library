@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
             @movie = Movie.find_by(title: params[:movie][:title], release_year: params[:movie][:release_year])
             if @movie.nil?
                 current_user.movies.create(title: params[:movie][:title], release_year: params[:movie][:release_year], director: params[:movie][:director])
-            elsif @movie.title == params[:movie][:title] && @movie.release_year == params[:movie][:release_year] && @movie.director == params[:movie][:director]
+            else
                 current_user.movies << @movie
             end
         end

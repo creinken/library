@@ -23,7 +23,7 @@ class ApplicationController < Sinatra::Base
 
         def current_user
             # find the current logged in user from User table records
-            User.find(session[:user_id])
+            @user ||= User.find(session[:user_id])
         end
 
         def owned_by(user_id)
